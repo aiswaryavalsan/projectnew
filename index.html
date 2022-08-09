@@ -8,9 +8,9 @@
 </head>
 <body>
     <form onsubmit="onsubmit1(event)">
-       choose expense amount <input type="text" name="amount">
-        choose discription<input type="text " name="dis">
-        choose category<input type="text" name="cat">
+       choose expense amount <input type="text" name="amount" id="amount">
+        choose discription<input type="text " name="dis" id="dis">
+        choose category<input type="text" name="cat" id="cat">
         <button type="submit" value="submit" height="100" width="100">add expense</button>
         <ul id="users"></ul>
     </form>
@@ -61,6 +61,16 @@
        let parent=document.getElementById('users');
        let child=document.getElementById(cat);
         parent.removeChild(child);
+
+      }
+      function edititem(category)
+      {
+       //
+        removeUserFromScreen(category);
+        localStorage.removeItem(category);
+        document.getElementById("cat").value=category;
+        document.getElementById("amount").value='';
+        document.getElementById("dis").value='';
 
       }
 
