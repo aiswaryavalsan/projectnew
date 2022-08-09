@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="onsubmit1(event)">
+       choose expense amount <input type="text" name="amount">
+        choose discription<input type="text " name="dis">
+        choose category<input type="text" name="cat">
+        <button type="submit" value="submit" height="100" width="100">add expense</button>
+        <ul id="users"></ul>
+    </form>
+    <script>
+        function onsubmit1(event)
+        {
+            event.preventDefault()
+            const amount=event.target.amount.value;
+            const discription=event.target.dis.value;
+            const category=event.target.cat.value
+           // localStorage.setItem("amount",amount);
+           // localStorage.setItem("discription",discription);
+           // localStorage.setItem("category",category);
+            const obj={
+                amount,
+                discription,
+                category
+            }
+            localStorage.setItem(obj.category,JSON.stringify(obj));
+            
+            showUserOnScreen(obj);
+        }
+        function showUserOnScreen(user)
+         {
+          let deleteBtn=document.createElement('button');
+           let editBtn=document.createElement('button');
+           console.log(editBtn);
+           deleteBtn.appendChild(document.createTextNode('delete'));
+ 
+            editBtn.appendChild(document.createTextNode('edit'));
+             let parent=document.getElementById("users");
+           console.log(parent);
+
+         let childhtml=  `<li id=${user.category} >${user.amount}-${user.discription}-${user.category}
+           <button onclick=deleteitem('${user.category}')>delete</button>
+           <button onclick=edititem('${user.category}')>edit</button>
+           
+           </li>`;
+           parent.innerHTML=parent.innerHTML+childhtml;
+           console.log(childhtml);
+        }
+           function deleteitem(category){
+            localStorage.removeItem(category);
+           removeUserFromScreen(category);
+        }
+        function removeUserFromScreen(cat)
+       {
+       let parent=document.getElementById('users');
+       let child=document.getElementById(cat);
+        parent.removeChild(child);
+
+      }
+
+       </script>
+
+</body>
+</html>
